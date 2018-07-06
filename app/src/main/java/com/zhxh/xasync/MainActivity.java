@@ -14,15 +14,19 @@ import static android.os.Looper.prepare;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button button;
+    Button button1;
+    Button button2;
+    TextView text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button = findViewById(R.id.button);
+        button1 = findViewById(R.id.button1);
+        button2 = findViewById(R.id.button2);
+        text = findViewById(R.id.text);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Thread() {
@@ -31,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                         super.run();
                         prepare();
                         TextView tv = new TextView(MainActivity.this);
-                        tv.setText("不是通过UI Thread");
+                        tv.setText("不是通过UI线程");
                         tv.setTextColor(Color.RED);
 
                         WindowManager windowManager = MainActivity.this.getWindowManager();
@@ -42,6 +46,20 @@ public class MainActivity extends AppCompatActivity {
                         loop();
                     }
                 }.start();
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        super.run();
+                        text.setText("不是通过UI线程");
+                    }
+                }.start();
+
             }
         });
 
