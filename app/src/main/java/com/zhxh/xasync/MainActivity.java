@@ -26,6 +26,14 @@ public class MainActivity extends AppCompatActivity {
         button2 = findViewById(R.id.button2);
         text = findViewById(R.id.text);
 
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                text.setText("在onCreate里面不是通过UI线程");
+            }
+        }.start();
+
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
