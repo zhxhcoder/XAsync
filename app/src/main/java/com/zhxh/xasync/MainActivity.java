@@ -3,6 +3,7 @@ package com.zhxh.xasync;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -60,17 +61,22 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        super.run();
-                        text.setText("不是通过UI线程");
-                    }
-                }.start();
+                Handler handler=new Handler(getMainLooper());
+
+
+                //new Thread() {
+                //    @Override
+                //    public void run() {
+                //        super.run();
+                //        text.setText("不是通过UI线程");
+                //    }
+                //}.start();
 
             }
         });
 
-
     }
+
+
+
 }
